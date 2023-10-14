@@ -16,6 +16,8 @@ vim.g.loaded_perl_provider = 0
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+vim.keymap.set("n", "<leader>l", ":Lazy<CR>", { desc = "Open Lazy.nvim" })
+
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
