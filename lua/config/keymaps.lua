@@ -27,3 +27,11 @@ vim.keymap.set("n", "<leader><C-a>", "gg<S-v>G", { desc = "select all" })
 
 -- format json in the current buffer
 vim.keymap.set("n", "<leader>fj", ":%! jq .<CR>", { desc = "format json in current buffer" })
+
+-- splits
+vim.keymap.set("n", "<leader>-", ":split<CR>", { desc = "split horizontal" })
+vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "split vertical" })
+vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "focus split up" })
+vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "focus split down" })
+vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "focus split left" })
+vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { desc = "focus split right" })
