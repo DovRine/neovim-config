@@ -22,6 +22,5 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
-	-- { "folke/which-key.nvim" },
 })
 
