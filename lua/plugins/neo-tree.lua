@@ -7,6 +7,7 @@ return {
     branch = "v3.x",
     keys = {
         { "<leader>e", ":Neotree toggle<CR>", desc = "toggle file manager" },
+        { "<leader>ef", ":Neotree reveal<CR>", desc = "reveal current file in file manager" },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
