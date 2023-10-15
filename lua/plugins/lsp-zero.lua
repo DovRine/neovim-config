@@ -34,10 +34,6 @@ return {
                         vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
                     end,
                     bufopts)
-                vim.keymap.set('n', 'gv', function()
-                    vim.cmd([[vsplit]])
-                    vim.lsp.buf.definition()
-                end, opts)
                 lsp.default_keymaps({ buffer = bufnr })
             end)
 
