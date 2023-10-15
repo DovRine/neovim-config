@@ -1,6 +1,7 @@
 return {
     {
         "tpope/vim-fugitive",
+        lazy = false,
         keys = {
             { "<leader>gs", ":Git status<CR>", { desc = "git status" } },
             { "<leader>ga", ":Git add -A<CR>", { desc = "git add all" } },
