@@ -7,13 +7,13 @@ return {
             require("tokyonight").setup({
                 -- use the night style
                 style = "night",
-                -- disable italic for functions
-                styles = {
-                    comments = { italic = true },
-                    keywords = { italic = true },
-                    functions = {},
-                    variables = {},
-                },
+            --     -- disable italic for functions
+            --     styles = {
+            --         comments = { italic = true },
+            --         keywords = { italic = true },
+            --         functions = {},
+            --         variables = {},
+            --     },
                 terminal_colors = true,
                 sidebars = { "qf", "vista_kind", "terminal", "packer" },
                 on_colors = function(colors)
