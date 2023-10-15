@@ -35,3 +35,18 @@ vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "focus split up" })
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "focus split down" })
 vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "focus split left" })
 vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", { desc = "focus split right" })
+
+-- buffers
+local cmd_next = ":bnext<CR>"
+local cmd_prev = ":bprev<CR>"
+local last_cmd = cmd_next
+vim.keymap.set("n", "bb", function()
+        if (last_cmd == cmd_next) then
+            last_cmd = cmd_prev
+        else
+            last_cmd = cmd_next
+        end
+
+        vim.cmd.normal(vim.api.nvim_replace_termcodes(last_cmd, true, true, true))
+    end,
+    { desc = "toggle between last 2 open buffers" })
