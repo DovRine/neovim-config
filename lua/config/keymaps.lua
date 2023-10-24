@@ -68,3 +68,6 @@ vim.keymap.set("n", "bb", function()
 
 -- show popup for linter errors to show complete message
 vim.keymap.set('n', '<leader>k', ':lua vim.diagnostic.open_float()<cr>')
+
+-- close current buffer without closing the window
+vim.keymap.set('n', '<leader>bb', ':bp<bar>sp<bar>bn<bar>bd<CR>', { desc = "close current buffer" })
