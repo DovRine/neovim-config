@@ -28,16 +28,33 @@ return {
           --- You can override specific color groups to use other groups or a hex color
           --- function will be called with a ColorScheme table
           ---@param colors ColorScheme
-          on_colors = function(colors) 
-            colors.error = "#ff0000"
+          on_colors = function(colors)
+            colors.bg = "#111111"
+            colors.yellow = "#FFEE58"
+            colors.pink = "#F700FC"
+            colors.dodgerblue = "#18B5FF"
+            colors.blue = "#0309FF"
+            colors.green = "#02FA00"
+            colors.white = "#ffffff"
+            colors.red = "#ff0000"
           end,
 
           --- You can override specific highlights to use other groups or a hex color
           --- function will be called with a Highlights and ColorScheme table
           ---@param highlights Highlights
           ---@param colors ColorScheme
-          on_highlights = function(highlights, colors) end,
+          on_highlights = function(highlights, colors) 
+              highlights.Function = { fg = colors.yellow }
+              highlights.String = { fg = colors.pink }
+              highlights.Number = { fg = colors.dodgerblue }
+              highlights.Identifier = { fg = colors.green }
+              highlights.Operator = { fg = colors.white }
+              highlights.Type = { fg = colors.red }
+              -- highlights.Character = { fg = colors.white }
+              -- highlights.Keyword = { fg = colors.blue }
+          end,
       })
-      vim.cmd([[colorscheme tokyonight]])
+      vim.cmd('colorscheme tokyonight')
+      -- vim.cmd([[colorscheme tokyonight]])
     end,
 }
