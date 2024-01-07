@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>tl', function()
                 vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
             end,
-            bufopts
+            {}
         )
     end,
 })
@@ -29,9 +29,13 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/nvim-cmp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
     },
     config = function()
-        print('lsp setup')
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -75,7 +79,21 @@ return {
             handlers = {
                 -- default handler
                 function(server_name)
-                    require("lspconfig")[server_name].setup {}
+                    require('cmp').setup {
+                        sources = {
+                            { name = 'nvim_lsp' }
+                        }
+                    }
+                    local cmp = require("cmp_nvim_lsp")
+                    local capabilities = vim.tbl_deep_extend(
+                        "force",
+                        {},
+                        vim.lsp.protocol.make_client_capabilities(),
+                        cmp.default_capabilities()
+                    )
+                    require("lspconfig")[server_name].setup {
+                        capabilities = capabilities
+                    }
                 end,
 
                 -- dedicated handlers
