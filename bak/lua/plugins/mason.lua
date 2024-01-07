@@ -3,7 +3,6 @@ return {
     keys = {
         { "<leader>m", ":Mason<CR>", desc = "Mason" },
     },
-    priority = 200, -- ensure that mason is configured before lspconfig
     config = function()
         require("mason").setup({
             ui = {

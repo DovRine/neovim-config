@@ -1,53 +1,43 @@
 return {
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            require("tokyonight").setup({
-                -- use the night style
-                style = "night",
-            --     -- disable italic for functions
-            --     styles = {
-            --         comments = { italic = true },
-            --         keywords = { italic = true },
-            --         functions = {},
-            --         variables = {},
-            --     },
-                terminal_colors = true,
-                sidebars = { "qf", "vista_kind", "terminal", "packer" },
-                on_colors = function(colors)
-                    colors.black = "#000000"
-                    colors.nearly_black = "#080808"
-                    colors.charcoal = "#111111"
-                    colors.blue = "#0099FF"
-                    colors.cyan = "#0AF7EF"
-                    colors.gray = "#666666"
-                    colors.green = "#00FF00"
-                    colors.purple = "#AA00AA"
-                    colors.teal = colors.cyan
-                    colors.red = "#FF0033"
-                    colors.yellow = "#FFFF00"
-                    colors.white = "#FFFFFF"
-                    colors.bg = colors.charcoal
-                    colors.fg = colors.white
-                    colors.border = colors.purple
-                end,
-                on_highlights = function(highlights, colors)
-                    highlights["DiagnosticUnnecessary"] = { fg = colors.gray }
-                    highlights["@keyword.function"] = { fg = colors.yellow, italic = true }
-                    highlights["@parameter"] = { fg = colors.yellow }
-                    highlights["@property"] = { fg = colors.orange }
-                    highlights["@string.regex"] = { fg = colors.orange }
-                    highlights["@type.builtin"] = { fg = colors.green }
-                    highlights["@keyword"] = { fg = colors.green }
-                    highlights["@string"] = { fg = colors.blue }
-                    highlights["@comments"] = { fg = colors.gray }
-                    highlights["@number"] = { fg = colors.orange }
-                    highlights["@type.definition"] = { fg = colors.red }
-                end,
-            })
-            vim.cmd([[colorscheme tokyonight]])
-        end,
-    },
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+      require("tokyonight").setup({
+          style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+          light_style = "day", -- The theme is used when the background is set to light
+          transparent = false, -- Enable this to disable setting the background color
+          terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+          styles = {
+            -- Style to be applied to different syntax groups
+            -- Value is any valid attr-list value for `:help nvim_set_hl`
+            comments = { italic = true },
+            keywords = { italic = true },
+            functions = {},
+            variables = {},
+            -- Background styles. Can be "dark", "transparent" or "normal"
+            sidebars = "dark", -- style for sidebars, see below
+            floats = "dark", -- style for floating windows
+          },
+          sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+          day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+          hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+          dim_inactive = false, -- dims inactive windows
+          lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+
+          --- You can override specific color groups to use other groups or a hex color
+          --- function will be called with a ColorScheme table
+          ---@param colors ColorScheme
+          on_colors = function(colors) 
+            colors.error = "#ff0000"
+          end,
+
+          --- You can override specific highlights to use other groups or a hex color
+          --- function will be called with a Highlights and ColorScheme table
+          ---@param highlights Highlights
+          ---@param colors ColorScheme
+          on_highlights = function(highlights, colors) end,
+      })
+      vim.cmd([[colorscheme tokyonight]])
+    end,
 }
