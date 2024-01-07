@@ -33,7 +33,6 @@ return {
             colors.yellow = "#FFEE58"
             colors.pink = "#F700FC"
             colors.dodgerblue = "#18B5FF"
-            colors.blue = "#0309FF"
             colors.green = "#02FA00"
             colors.white = "#ffffff"
             colors.red = "#ff0000"
