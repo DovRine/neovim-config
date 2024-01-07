@@ -9,27 +9,27 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selected lines up" }
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "use blackhole registers to delete" })
 
 -- copy to system clipboard
-vim.keymap.set("n", "<leader>y", "+y")
-vim.keymap.set("v", "<leader>y", "+y")
-vim.keymap.set("n", "<leader>Y", "+Y")
-vim.keymap.set("v", "<leader>Y", "+Y")
+vim.keymap.set("n", "<leader>y", "+y", { desc = "copy to default clipboard (normal mode)"})
+vim.keymap.set("v", "<leader>y", "+y", { desc = "copy to default clipboard (visual mode)"})
+vim.keymap.set("n", "<leader>Y", "+Y", { desc = "copy to system clipboard (normal mode)"})
+vim.keymap.set("v", "<leader>Y", "+Y", { desc = "copy to system clipboard (visual mode)"})
 
 -- allow moving selected lines in visual mode
 vim.keymap.set("n", "<leader>d", '"_d', { desc = "use blackhole registers to delete" })
 
 -- cursor motions
-vim.keymap.set("n", "J", "mzJ`z")           -- join lines without moving the cursor
-vim.keymap.set("n", "<C-d>", "<C-d>zz")     -- jump down half a page: keep the cursor in the middle of the screen
-vim.keymap.set("n", "<C-u>", "<C-u>zz")     -- jump up half a page: keep the cursor in the middle of the screen
-vim.keymap.set("n", "n", "nzzzv")           -- keep the cursor in the middle of the screen while searching
-vim.keymap.set("n", "N", "Nzzzv")           -- keep the cursor in the middle of the screen while searching
+vim.keymap.set("n", "J", "mzJ`z", { desc = "join next line w/o moving cursor"})
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "move down half a page (keep cursor centered)"})
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "move up half a page (keep cursor centered)"})
+vim.keymap.set("n", "n", "nzzzv", { desc = "next search result (keep cursor centered)"})
+vim.keymap.set("n", "N", "Nzzzv", { desc = "prev search result (keep cursor centered)"})
 
 -- auto insert quotes, parens, braces, and brackets --
-vim.keymap.set("v", "(", "s()<esc>Pll")
-vim.keymap.set("v", "[", "s[]<esc>Pll")
-vim.keymap.set("v", "{", "s{}<esc>Pll")
-vim.keymap.set("v", "'", "s''<esc>Pll")
-vim.keymap.set("v", '"', 's""<esc>Pll')
+vim.keymap.set("v", "(", "s()<esc>Pll", { desc = "wrap selection with parens"})
+vim.keymap.set("v", "[", "s[]<esc>Pll", { desc = "wrap selection with square braces"})
+vim.keymap.set("v", "{", "s{}<esc>Pll", { desc = "wrap selection with curly braces"})
+vim.keymap.set("v", "'", "s''<esc>Pll", { desc = "wrap selection with single quotes"})
+vim.keymap.set("v", '"', 's""<esc>Pll', { desc = "wrap selection with double quotes"})
 
 -- insert blank line above removing any auto-added chars
 vim.keymap.set("n", "<leader>na", "O<esc>0d$j", { desc = "insert blank line above" })
@@ -67,7 +67,7 @@ vim.keymap.set("n", "bb", function()
     { desc = "toggle between last 2 open buffers" })
 
 -- show popup for linter errors to show complete message
-vim.keymap.set('n', '<leader>k', ':lua vim.diagnostic.open_float()<cr>')
+vim.keymap.set('n', '<leader>k', ':lua vim.diagnostic.open_float()<cr>', { desc = "show selection popup"})
 
 -- close current buffer without closing the window
 vim.keymap.set('n', '<leader>bb', ':bp<bar>sp<bar>bn<bar>bd<CR>', { desc = "close current buffer" })

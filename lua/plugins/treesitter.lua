@@ -40,5 +40,4 @@ return {
             indent = { enable = true },
         },
     },
-    { "nvim-treesitter/playground", },
 }
