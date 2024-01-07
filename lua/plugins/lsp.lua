@@ -73,9 +73,24 @@ return {
                 "zls",
             },
             handlers = {
+                -- default handler
                 function(server_name)
                     require("lspconfig")[server_name].setup {}
-                end
+                end,
+
+                -- dedicated handlers
+                ["lua_ls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.lua_ls.setup {
+                        settings = {
+                            Lua = {
+                                diagnostics = {
+                                    globals = { "vim" },
+                                }
+                            }
+                        }
+                    }
+                end,
             },
         })
     end,
