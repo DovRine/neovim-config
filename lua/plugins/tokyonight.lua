@@ -51,6 +51,8 @@ return {
               highlights.Type = { fg = colors.red }
               -- highlights.Character = { fg = colors.white }
               -- highlights.Keyword = { fg = colors.blue }
+              -- highlights.Comment = { fg = colors.green }
+              highlights.Directory = { fg = colors.yellow }
           end,
       })
       vim.cmd('colorscheme tokyonight')
