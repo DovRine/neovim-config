@@ -31,7 +31,7 @@ return {
           on_colors = function(colors)
             colors.bg = "#111111"
             colors.yellow = "#FFEE58"
-            colors.pink = "#F700FC"
+            colors.pink = "#C700FC"
             colors.dodgerblue = "#18B5FF"
             colors.green = "#02FA00"
             colors.white = "#ffffff"
@@ -47,8 +47,10 @@ return {
               highlights.String = { fg = colors.pink }
               highlights.Number = { fg = colors.dodgerblue }
               highlights.Identifier = { fg = colors.green }
-              highlights.Operator = { fg = colors.white }
+              highlights.Statement = { fg = colors.purple }
+              highlights.Operator = { fg = colors.blue }
               highlights.Type = { fg = colors.red }
+              highlights.Exception = { fg = colors.red }
               -- highlights.Character = { fg = colors.white }
               -- highlights.Keyword = { fg = colors.blue }
               -- highlights.Comment = { fg = colors.green }
