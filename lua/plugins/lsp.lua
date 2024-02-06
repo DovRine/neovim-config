@@ -102,7 +102,6 @@ return {
 
                 -- dedicated handlers
                 ["lua_ls"] = function()
-                    print('lua 1')
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         settings = {
@@ -115,7 +114,6 @@ return {
                     }
                 end,
                 ['helm_ls'] = function()
-                    print('helm 2')
                     local lspconfig = require("lspconfig")
                     lspconfig.helm_ls.setup {
                         settings = {
