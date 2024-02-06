@@ -34,6 +34,10 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
+        {
+            "towolf/vim-helm",
+            ft = "helm"
+        },
     },
     config = function()
         require("mason").setup()
@@ -98,6 +102,7 @@ return {
 
                 -- dedicated handlers
                 ["lua_ls"] = function()
+                    print('lua 1')
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         settings = {
@@ -108,6 +113,37 @@ return {
                             }
                         }
                     }
+                end,
+                ['helm_ls'] = function()
+                    print('helm 2')
+                    local lspconfig = require("lspconfig")
+                    lspconfig.helm_ls.setup {
+                        settings = {
+                            ['helm-ls'] = {
+                                logLevel = "info",
+                                valuesFiles = {
+                                    mainValuesFile = "values.yaml",
+                                    lintOverlayValuesFile = "values.lint.yaml",
+                                    additionalValuesFilesGlobPattern = "values*.yaml"
+                                },
+                                yamlls = {
+                                    enabled = true,
+                                    diagnosticsLimit = 50,
+                                    showDiagnosticsDirectly = false,
+                                    path = "yaml-language-server",
+                                    config = {
+                                        schemas = {
+                                            kubernetes = "templates/**",
+                                        },
+                                        completion = true,
+                                        hover = true,
+                                        -- any other config from https://github.com/redhat-developer/yaml-language-server#language-server-settings
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    lspconfig.yamlls.setup {}
                 end,
             },
         })
