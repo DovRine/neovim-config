@@ -19,3 +19,6 @@ vim.opt.colorcolumn = "80"
 vim.opt.foldmethod = "manual"
 
 vim.opt.clipboard = "unnamedplus"
+
+vim.opt.list = true
+vim.opt.listchars = "tab:»·,trail:·"
