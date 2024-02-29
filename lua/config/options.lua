@@ -21,4 +21,4 @@ vim.opt.foldmethod = "manual"
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.list = true
-vim.opt.listchars = "tab:»·,trail:·"
+vim.opt.listchars = "leadmultispace:·.,tab:»·,trail:·"

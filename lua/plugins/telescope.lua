@@ -20,11 +20,18 @@ return {
             desc = "Find file",
         },
         {
-            "<leader>s",
+            "<leader>ss",
             function()
                 require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ") })
             end,
             desc = "Search for text in files"
+        },
+        {
+            "<leader>sl",
+            function()
+                require('telescope.builtin').live_grep({ search = vim.fn.input("Live Grep > ") })
+            end,
+            desc = "Search for text in files using a regex"
         }
     },
     config = function()
