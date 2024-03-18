@@ -48,7 +48,7 @@ return {
                 "cmake",
                 "cssls",
                 "cssmodules_ls",
-                "diagnosticls",
+                -- "diagnosticls",
                 "dockerls",
                 "docker_compose_language_service",
                 "dotls",
