@@ -32,23 +32,23 @@ return {
                 }):find()
             end
 
-            vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+            vim.keymap.set("n", "<leader>hh", function() toggle_telescope(harpoon:list()) end,
                 { desc = "Open harpoon window" })
-            vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end,
+            vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end,
                 { desc = "append" })
-            vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+            vim.keymap.set("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
                 { desc = "toggle quick menu" })
-            vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end,
+            vim.keymap.set("n", "<leader>hj", function() harpoon:list():select(1) end,
                 { desc = "select 1" })
-            vim.keymap.set("n", "<C-k>", function() harpoon:list():select(2) end,
+            vim.keymap.set("n", "<leader>hk", function() harpoon:list():select(2) end,
                 { desc = "select 2" })
-            vim.keymap.set("n", "<C-l>", function() harpoon:list():select(3) end,
+            vim.keymap.set("n", "<leader>hl", function() harpoon:list():select(3) end,
                 { desc = "select 3" })
-            vim.keymap.set("n", "<C-;>", function() harpoon:list():select(4) end,
+            vim.keymap.set("n", "<leader>h;", function() harpoon:list():select(4) end,
                 { desc = "select 4" })
-            vim.keymap.set("n", "<C-a>", function() harpoon:list():prev() end,
+            vim.keymap.set("n", "<leader>hn", function() harpoon:list():prev() end,
                 { desc = "previous" })
-            vim.keymap.set("n", "<C-s>", function() harpoon:list():next() end,
+            vim.keymap.set("n", "<leader>hm", function() harpoon:list():next() end,
                 { desc = "next" })
         end,
     }
