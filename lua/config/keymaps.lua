@@ -45,7 +45,7 @@ vim.keymap.set("n", "<leader>fj", ":%! jq .<CR>", { desc = "format json in curre
 
 -- splits
 vim.keymap.set("n", "<leader>-", ":split<CR>", { desc = "split horizontal" })
-vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "split vertical" })
+vim.keymap.set("n", "<leader>|", ":vsplit<CR>:wincmd l<CR>", { desc = "split vertical -> right" })
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", { desc = "focus split up" })
 vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", { desc = "focus split down" })
 vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", { desc = "focus split left" })
@@ -71,3 +71,6 @@ vim.keymap.set('n', '<leader>k', ':lua vim.diagnostic.open_float()<cr>', { desc 
 
 -- close current buffer without closing the window
 vim.keymap.set('n', '<leader>bb', ':bp<bar>sp<bar>bn<bar>bd<CR>', { desc = "close current buffer" })
+
+-- turn off all highlights
+vim.keymap.set('n', '<leader>z', ':noh<CR>', { desc = "remove all highlights" })

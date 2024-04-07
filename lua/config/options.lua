@@ -22,3 +22,13 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.list = true
 vim.opt.listchars = "leadmultispace:·.,tab:»·,trail:·"
+
+-- treat all files as bash if the type is unknown
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*",
+    callback = function()
+        if vim.bo.filetype == '' then
+            vim.bo.filetype = 'bash'
+        end
+    end,
+})
