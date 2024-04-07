@@ -34,7 +34,7 @@ return {
 
             vim.keymap.set("n", "<leader>hh", function() toggle_telescope(harpoon:list()) end,
                 { desc = "Open harpoon window" })
-            vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end,
+            vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end,
                 { desc = "append to harpoon" })
             vim.keymap.set("n", "<leader>hd", function() harpoon:list():remove() end,
                 { desc = "remove from harpoon" })
