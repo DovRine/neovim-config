@@ -1,27 +1,50 @@
-vim.opt.winbar = "%=%m %f"
-vim.opt.number = true
-vim.opt.relativenumber = false
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.wrap = false
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
+local opt = vim.opt
 
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
+opt.swapfile = false
+opt.winbar = "%=%m %f"
+opt.wrap = false
 
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80"
+opt.number = true
+opt.relativenumber = true
 
-vim.opt.foldmethod = "manual"
+-- backspace
+opt.backspace = "indent,eol,start"
 
-vim.opt.clipboard = "unnamedplus"
+-- tabs & indentation
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
+opt.autoindent = true
 
-vim.opt.list = true
-vim.opt.listchars = "leadmultispace:·.,tab:»·,trail:·"
+-- search
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = true
+opt.incsearch = true
+
+-- undo
+opt.backup = false
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
+
+-- appearance
+opt.cursorline = true
+opt.termguicolors = true
+opt.background = "dark"
+opt.signcolumn = "yes"
+opt.colorcolumn = "80"
+
+opt.foldmethod = "manual"
+
+-- clipboard
+opt.clipboard:append("unnamedplus")
+
+-- splits
+opt.splitright = true
+opt.splitbelow = true
+
+opt.list = true
+opt.listchars = "leadmultispace:·.,tab:»·,trail:·"
 
 -- treat all files as bash if the type is unknown
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {

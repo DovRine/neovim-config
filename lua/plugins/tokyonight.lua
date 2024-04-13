@@ -30,8 +30,9 @@ return {
           ---@param colors ColorScheme
           on_colors = function(colors)
             colors.bg = "#111111"
-            colors.yellow = "#FFEE58"
-            colors.pink = "#C700FC"
+            colors.yellow = "#F4EEA6"
+            colors.purple = "#C700FC"
+            colors.pink = "#F4A6E5"
             colors.dodgerblue = "#18B5FF"
             colors.green = "#02FA00"
             colors.white = "#ffffff"
