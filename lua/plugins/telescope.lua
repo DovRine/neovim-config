@@ -4,6 +4,8 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
         "nvim-telescope/telescope-fzf-native.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "folke/todo-comments.nvim",
         build = "make",
         config = function()
             require("telescope").load_extension("fzf")
@@ -32,7 +34,12 @@ return {
                 require('telescope.builtin').live_grep({ search = vim.fn.input("Live Grep > ") })
             end,
             desc = "Search for text in files using a regex"
-        }
+        },
+        {
+            "<leader>ft",
+            "<cmd>TodoTelescope<CR>",
+            { desc = "find todos" },
+        },
     },
     config = function()
         require("telescope").setup({

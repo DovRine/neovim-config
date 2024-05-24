@@ -1,3 +1,6 @@
+def unused_var_color_contrast_test(i_am_unused):
+    pass
+
 def add(x: int, y: int):
     print(x)
         print(y)
