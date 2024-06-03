@@ -16,7 +16,6 @@ return {
         "TSUpdateSync",
     },
     build = ":TSUpdate",
-    run = ":TSUpdate",
     opts = {
         ensure_installed = {
             "bash",
