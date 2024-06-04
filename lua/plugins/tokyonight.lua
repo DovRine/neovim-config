@@ -27,7 +27,7 @@ return {
 
             --- You can override specific color groups to use other groups or a hex color
             --- function will be called with a ColorScheme table
-            ---@param colors ColorScheme
+            ---@param colors table<string, string>
             on_colors = function(colors)
                 colors.bg = "#111111"
                 colors.yellow = "#F4EEA6"
@@ -42,19 +42,19 @@ return {
 
             --- You can override specific highlights to use other groups or a hex color
             --- function will be called with a Highlights and ColorScheme table
-            ---@param highlights Highlights
-            ---@param colors ColorScheme
+            ---@param highlights table<string, table<string, string>>
+            ---@param colors table<string, string>
             on_highlights = function(highlights, colors)
                 highlights.Function = { fg = colors.yellow }
                 highlights.String = { fg = colors.pink }
                 highlights.Number = { fg = colors.dodgerblue }
                 highlights.Identifier = { fg = colors.green }
                 highlights.Statement = { fg = colors.purple }
-                highlights.Operator = { fg = colors.blue }
+                highlights.Operator = { fg = colors.dodgerblue }
                 highlights.Type = { fg = colors.red }
                 highlights.Exception = { fg = colors.red }
                 -- highlights.Character = { fg = colors.white }
-                -- highlights.Keyword = { fg = colors.blue }
+                -- highlights.Keyword = { fg = colors.dodgerblue }
                 highlights.Comment = { fg = colors.silver }
                 highlights.Directory = { fg = colors.yellow }
                 highlights.LspDiagnosticsUnused = { fg = colors.silver }
@@ -62,6 +62,5 @@ return {
             end,
         })
         vim.cmd('colorscheme tokyonight')
-
     end,
 }
