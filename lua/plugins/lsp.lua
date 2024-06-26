@@ -1,3 +1,4 @@
+-- Helper functions
 local function getBufferOpts(ev, tbl)
     local opts = { buffer = ev.buf }
     for k, v in pairs(tbl) do
@@ -16,21 +17,25 @@ local function goToDefinitionInVerticalSplit()
     end, 10)
 end
 
+-- LSP Attach configuration
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
         local defaultOpts = { desc = "" }
-        vim.keymap.set("n", "<C-g>", function() vim.lsp.buf.definition() end, getBufferOpts(ev, { desc = "go to definition" }))
-        vim.keymap.set("n", "<C-s>", goToDefinitionInVerticalSplit, getBufferOpts(ev, { desc = "go to definition in vertical split" }))
+        vim.keymap.set("n", "<C-g>", function() vim.lsp.buf.definition() end,
+            getBufferOpts(ev, { desc = "go to definition" }))
+        vim.keymap.set("n", "<C-s>", goToDefinitionInVerticalSplit,
+            getBufferOpts(ev, { desc = "go to definition in vertical split" }))
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, getBufferOpts(ev, defaultOpts))
-        vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format({ async = true }) end, getBufferOpts(ev, defaultOpts))
+        vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format({ async = true }) end,
+            getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, getBufferOpts(ev, defaultOpts))
         vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, getBufferOpts(ev, defaultOpts))
@@ -41,13 +46,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+-- Plugin configuration
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/nvim-cmp",
+        "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
@@ -57,6 +63,7 @@ return {
         },
     },
     config = function()
+        -- Mason setup
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -96,87 +103,99 @@ return {
                 "yamlls",
                 "zls",
             },
-            handlers = {
-                function(server_name)
-                    local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities,
-                        on_attach = function(client, bufnr)
-                            if client.server_capabilities.did_change_watched_files then
-                                vim.cmd('doautocmd User LspAttachBuffers')
-                            end
-                        end,
-                    }
+        })
+
+        -- CMP setup
+        local cmp = require 'cmp'
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body)
                 end,
-                ["lua_ls"] = function()
-                    require("lspconfig").lua_ls.setup {
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim" },
-                                },
-                            },
-                        },
-                        on_attach = function(client, bufnr)
-                            if client.server_capabilities.did_change_watched_files then
-                                vim.cmd('doautocmd User LspAttachBuffers')
-                            end
-                        end,
-                    }
-                end,
-                ["helm_ls"] = function()
-                    require("lspconfig").helm_ls.setup {
-                        settings = {
-                            ['helm-ls'] = {
-                                logLevel = "info",
-                                valuesFiles = {
-                                    mainValuesFile = "values.yaml",
-                                    lintOverlayValuesFile = "values.lint.yaml",
-                                    additionalValuesFilesGlobPattern = "values*.yaml",
-                                },
-                                yamlls = {
-                                    enabled = true,
-                                    diagnosticsLimit = 50,
-                                    showDiagnosticsDirectly = false,
-                                    path = "yaml-language-server",
-                                    config = {
-                                        schemas = {
-                                            kubernetes = "templates/**",
-                                        },
-                                        completion = true,
-                                        hover = true,
-                                    },
-                                },
-                            },
-                        },
-                        on_attach = function(client, bufnr)
-                            if client.server_capabilities.did_change_watched_files then
-                                vim.cmd('doautocmd User LspAttachBuffers')
-                            end
-                        end,
-                    }
-                    require("lspconfig").yamlls.setup {
-                        on_attach = function(client, bufnr)
-                            if client.server_capabilities.did_change_watched_files then
-                                vim.cmd('doautocmd User LspAttachBuffers')
-                            end
-                        end,
-                    }
-                end,
+            },
+            mapping = {
+                ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+                ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                ['<C-e>'] = cmp.mapping.abort(),
+            },
+            sources = {
+                { name = 'nvim_lsp' },
+                { name = 'buffer' },
+                { name = 'path' },
+                { name = 'luasnip' },
             },
         })
 
-        -- Configure specific LSP servers
+        -- LSP setup
         local lspconfig = require('lspconfig')
+        local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-        -- Ensure pyright and pylsp are set up
-        lspconfig.pyright.setup {
-            on_attach = function(client, bufnr)
-                if client.server_capabilities.did_change_watched_files then
-                    vim.cmd('doautocmd User LspAttachBuffers')
-                end
-            end,
+        local on_attach = function(client, bufnr)
+            if client.server_capabilities.did_change_watched_files then
+                vim.cmd('doautocmd User LspAttachBuffers')
+            end
+        end
+
+        -- Setup each LSP server
+        local servers = {
+            "bashls",
+            "clangd",
+            "cmake",
+            "cssls",
+            "cssmodules_ls",
+            "dockerls",
+            "docker_compose_language_service",
+            "dotls",
+            "emmet_ls",
+            "eslint",
+            "golangci_lint_ls",
+            "gopls",
+            "gradle_ls",
+            "grammarly",
+            "graphql",
+            "helm_ls",
+            "html",
+            "htmx",
+            "jqls",
+            "kotlin_language_server",
+            "lua_ls",
+            "marksman",
+            "phpactor",
+            "puppet",
+            "pyright",
+            "pylsp",
+            "rust_analyzer",
+            "sqlls",
+            "tailwindcss",
+            "taplo",
+            "tsserver",
+            "vuels",
+            "lemminx",
+            "yamlls",
+            "zls",
         }
+
+        for _, lsp in ipairs(servers) do
+            lspconfig[lsp].setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+        end
+
+        -- Specific configurations for some LSPs
+        lspconfig.lua_ls.setup {
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { "vim" },
+                    },
+                },
+            },
+            capabilities = capabilities,
+            on_attach = on_attach,
+        }
+
         lspconfig.pylsp.setup {
             settings = {
                 pylsp = {
@@ -186,33 +205,24 @@ return {
                     },
                 },
             },
-            on_attach = function(client, bufnr)
-                if client.server_capabilities.did_change_watched_files then
-                    vim.cmd('doautocmd User LspAttachBuffers')
-                end
-            end,
+            capabilities = capabilities,
+            on_attach = on_attach,
         }
-        lspconfig.eslint.setup {
-          on_attach = function(client, bufnr)
-            if client.server_capabilities.did_change_watched_files then
-              vim.cmd('doautocmd User LspAttachBuffers')
-            end
-            -- Optionally, you can add more settings or commands here specific to ESLint
-          end,
-          settings = {
-            validate = "on",
-            packageManager = "npm",
-            autoFixOnSave = true,
-            codeActionOnSave = {
-              enable = true,
-              mode = "all"
-            },
-            format = true,
-            workingDirectory = { mode = "auto" },
-          }
-      }
 
-        -- Set log level to ERROR
-        vim.lsp.set_log_level("ERROR")
+        lspconfig.eslint.setup {
+            settings = {
+                validate = "on",
+                packageManager = "npm",
+                autoFixOnSave = true,
+                codeActionOnSave = {
+                    enable = true,
+                    mode = "all",
+                },
+                format = true,
+                workingDirectory = { mode = "auto" },
+            },
+            capabilities = capabilities,
+            on_attach = on_attach,
+        }
     end,
 }
