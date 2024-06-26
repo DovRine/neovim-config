@@ -192,6 +192,25 @@ return {
                 end
             end,
         }
+        lspconfig.eslint.setup {
+          on_attach = function(client, bufnr)
+            if client.server_capabilities.did_change_watched_files then
+              vim.cmd('doautocmd User LspAttachBuffers')
+            end
+            -- Optionally, you can add more settings or commands here specific to ESLint
+          end,
+          settings = {
+            validate = "on",
+            packageManager = "npm",
+            autoFixOnSave = true,
+            codeActionOnSave = {
+              enable = true,
+              mode = "all"
+            },
+            format = true,
+            workingDirectory = { mode = "auto" },
+          }
+      }
 
         -- Set log level to ERROR
         vim.lsp.set_log_level("ERROR")
