@@ -1,6 +1,10 @@
 local keymap = vim.keymap
 
 vim.g.mapleader = " "
+vim.g.python3_host_prog = "/usr/bin/python3"
+
+vim.env.LUA_PATH = "/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua"
+vim.env.LUA_CPATH = "/usr/lib/lua/5.1/?.so"
 
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
