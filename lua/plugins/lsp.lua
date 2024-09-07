@@ -177,6 +177,9 @@ return {
         }
 
         for _, lsp in ipairs(servers) do
+            if lsp == "tsserver" then
+                lsp = 'ts_ls'
+            end
             lspconfig[lsp].setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
