@@ -212,6 +212,14 @@ return {
             on_attach = on_attach,
         }
 
+        lspconfig.phpactor.setup {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            flags = {
+                debounce_text_changes = 150,
+            }
+        }
+
         lspconfig.eslint.setup {
             settings = {
                 validate = "on",
